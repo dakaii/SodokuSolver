@@ -6,33 +6,38 @@ import java.lang.*;
 
 class SudokuSolver {
  	Random random = new Random();
-// if the cell is occupied, the i increases by 1. if theres no more possible values to be assigned, the i decreases by 1.
+ 	private static int mm = 0;
+// if the cell is occupied, the mm increases by 1. if theres no more possible values to be assigned, the mm decreases by 1.
 
- 	public int [][] solve(int[][] puzzle, int[] initialArray,List<List<Integer>> arrlist,int i){
+ 	public int [][] solve(int[][] puzzle, int[] initialArray,List<List<Integer>> arrlist){
  		int solution;
-		if(i==0)
-			while(isPreset(initialArray)[i]){i++;}	
+ 		int row;
+ 		int column;
+		if(mm==0)
+			while(isPreset(initialArray)[mm]){mm++;}
+			row = mm/9;
+			column = mm%9;	
 
- 			if(isSolved(puzzle) || i==81){return puzzle;}			//return if the puzzle has been solved.
- 			if(isPreset(initialArray)[i]==false){	//if the cell is not preset or filled with 0.
-				puzzle[i/9][i%9] = 0;																	// the cell gets initialized here.
+ 			if(isSolved(puzzle) || mm==81){return puzzle;}			//return if the puzzle has been solved.
+ 			if(isPreset(initialArray)[mm]==false){	//if the cell is not preset or filled with 0.
+				puzzle[row][column] = 0;																	// the cell gets initialized here.
 			}
- 			//		System.out.println(Arrays.deepToString(puzzle).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
- 			//		System.out.println("\n");
+ 					//System.out.println(Arrays.deepToString(puzzle).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
+ 					//System.out.println("\n");
 
-			solution = testValue(possibleSolutions(i/9,i%9,puzzle),arrlist,i);//assign an element thats not 0 or in the arraylist.	
+			solution = testValue(possibleSolutions(mm/9,mm%9,puzzle),arrlist,mm);//assign an element thats not 0 or in the arraylist.	
 							
 				if(solution!=0){
-					puzzle[i/9][i%9]=solution;
-					arrlist.get(i).add(puzzle[i/9][i%9]);												//add the tested value to an arraylist.
-						i++;	
+					puzzle[row][column]=solution;
+					arrlist.get(mm).add(puzzle[row][column]);												//add the tested value to an arraylist.
+						mm++;	
 							if(isSolved(puzzle)){return puzzle;}	
-							while(isPreset(initialArray)[i]){i++;}					
-					solve(puzzle,initialArray,arrlist,i);				
+							while(isPreset(initialArray)[mm]){mm++;}					
+					solve(puzzle,initialArray,arrlist);				
 				}else{
-					arrlist.get(i).clear();
-						i--;
-					solve(puzzle,initialArray,arrlist,i);
+					arrlist.get(mm).clear();
+						mm--;
+					solve(puzzle,initialArray,arrlist);
 				}
 		return puzzle;
  	}
@@ -40,14 +45,14 @@ class SudokuSolver {
 	public int[][] setup(int numberOfPresets){
 		int [][] puzzle = new int [9][9];
 		int [] arr = new int [81];
-		int iteration = 0;
 			for(int i=0;i<81;i++){
 				arr[i]=puzzle[i/9][i%9];
 			}
-	 			puzzle = solve(puzzle,arr,arraylistSetup(),iteration);
+	 			puzzle = solve(puzzle,arr,arraylistSetup());
 			for(int j=0;j<81-numberOfPresets;j++){
 				initializeCell(puzzle);
 		}
+			mm=0;
  			return puzzle;
 	}
 

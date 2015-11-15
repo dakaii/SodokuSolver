@@ -6,14 +6,14 @@ class Sudoku {
 	public static void main(String[] args) {
 	 	Scanner input = new Scanner(System.in);
 	 	Random random = new Random();
- 	SudokuSolver solver =new SudokuSolver();				
+ 		SudokuSolver solver =new SudokuSolver();				
 //------------------------------------------------------------------------------------------------------------------------
 	
 		System.out.println("easy/moderate/hard");
-  	String choice = input.nextLine();
-  	char level = choice.charAt(0);
+  		String choice = input.nextLine();
+  		char level = choice.charAt(0);
   
-	  int	numberOfPresetValues = 17;
+	  	int	numberOfPresetValues = 17;
 
 		if(level=='e'){
 		 	numberOfPresetValues = 17;
@@ -39,20 +39,12 @@ class Sudoku {
 			}
 
 		System.out.print("Would you like to see the solution? (y/n)");
-  	String yesOrNo = input.nextLine();
-  	char firstLetter = yesOrNo.charAt(0);
-		if(firstLetter=='y'){		
-			int iteration = 0;
-			sudokuField = solver.solve(sudokuField,arr,solver.arraylistSetup(),iteration);
-		}
-		System.out.println(Arrays.deepToString(sudokuField).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
-		/*
-		System.out.println("\n");
-		
-			for(int i=0;i<81;i++){
-				sudokuField[i/9][i%9]=arr[i];
+  		String yesOrNo = input.nextLine();
+  		char firstLetter = yesOrNo.charAt(0);
+			if(firstLetter=='y'){		
+
+				sudokuField = solver.solve(sudokuField,arr,solver.arraylistSetup());
 			}
 		System.out.println(Arrays.deepToString(sudokuField).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
-		*/
 	}
 }
