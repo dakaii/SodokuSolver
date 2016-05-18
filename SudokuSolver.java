@@ -6,7 +6,7 @@ import java.lang.*;
 
 class SudokuSolver {
  	Random random = new Random();
- 	private static int mm = 0;
+ 	private int mm = 0;
 // if the cell is occupied, the mm increases by 1. if theres no more possible values to be assigned, the mm decreases by 1.
 
  	public int [][] solve(int[][] puzzle, int[] initialArray,List<List<Integer>> arrlist){
