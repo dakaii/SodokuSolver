@@ -22,21 +22,21 @@ class Sudoku {
 		}else if(level=='h'){
 			numberOfPresetValues = 23;
 		}else{
-						numberOfPresetValues = 5;
+						numberOfPresetValues = 15;
 		}		
 //------------------------------------------------------------------------------------------------------------------------
 		//setup
-			int [][] sudokuField = new int [9][9];
-			int [] arr = new int [81];
-			sudokuField = solver.setup(numberOfPresetValues);	//assigns random values to random cells within each 3x3 field. will be repeated 9 times.
-		
-			System.out.println(Arrays.deepToString(sudokuField).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
+		int [][] sudokuField = new int [9][9];
+		int [] arr = new int [81];
+		sudokuField = solver.setup(numberOfPresetValues);	//assigns random values to random cells within each 3x3 field. will be repeated 9 times.
 	
+		System.out.println(Arrays.deepToString(sudokuField).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
+
 //------------------------------------------------------------------------------------------------------------------------
 		// solve
-			for(int i=0;i<81;i++){
-				arr[i]=sudokuField[i/9][i%9];
-			}
+		for(int i=0;i<81;i++){
+			arr[i]=sudokuField[i/9][i%9];
+		}
 
 		System.out.print("Would you like to see the solution? (y/n)");
   		String yesOrNo = input.nextLine();
