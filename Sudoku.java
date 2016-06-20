@@ -43,7 +43,7 @@ class Sudoku {
   		char firstLetter = yesOrNo.charAt(0);
 			if(firstLetter=='y'){		
 
-				sudokuField = solver.solve(sudokuField,arr,solver.arraylistSetup());
+				sudokuField = solver.solve(sudokuField,arr,solver.arraylistSetup(),0);
 			}
 		System.out.println(Arrays.deepToString(sudokuField).replaceAll("],", "]\n").replaceAll("0", " ").replaceAll(",", "|"));
 	}

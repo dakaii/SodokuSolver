@@ -5,11 +5,11 @@ import java.util.*;
 import java.lang.*;
 
 class SudokuSolver {
- 	Random random = new Random();
- 	private int mm = 0;
+ 	//Random random = new Random();
+ 	//private int mm = 0;
 // if the cell is occupied, the mm increases by 1. if theres no more possible values to be assigned, the mm decreases by 1.
 
- 	public int [][] solve(int[][] puzzle, int[] initialArray,List<List<Integer>> arrlist){
+ 	public int [][] solve(int[][] puzzle, int[] initialArray,List<List<Integer>> arrlist, int mm){
  		int solution;
  		int row;
  		int column;
@@ -31,11 +31,11 @@ class SudokuSolver {
 			mm++;	
 			if(isSolved(puzzle)){return puzzle;}	
 			while(isPreset(initialArray)[mm]){mm++;}					
-			solve(puzzle,initialArray,arrlist);				
+			solve(puzzle,initialArray,arrlist,mm);				
 		}else{
 			arrlist.get(mm).clear();
 			mm--;
-			solve(puzzle,initialArray,arrlist);
+			solve(puzzle,initialArray,arrlist,mm);
 		}
 		return puzzle;
  	}
@@ -46,11 +46,11 @@ class SudokuSolver {
 		for(int i=0;i<81;i++){
 			arr[i]=puzzle[i/9][i%9];
 		}
-	 	puzzle = solve(puzzle,arr,arraylistSetup());
+	 	puzzle = solve(puzzle,arr,arraylistSetup(),0);
 		for(int j=0;j<81-numberOfPresets;j++){
 			initializeCell(puzzle);
 		}
-		mm=0;
+		//mm=0;
  		return puzzle;
 	}
 
@@ -151,7 +151,7 @@ class SudokuSolver {
 
 	public int[] shuffleArray(int[] arr){
 		for(int i=0;i<arr.length;i++){
-			int index=random.nextInt(arr.length-1);
+			int index=new Random().nextInt(arr.length-1);
 			int temp=arr[index];
 			arr[index]=arr[i];
 			arr[i]=temp;
@@ -160,8 +160,8 @@ class SudokuSolver {
 	}
 
 	public int[][] initializeCell(int[][] multiArr){
-		int row = random.nextInt(9);
-		int column = random.nextInt(9);	
+		int row = new Random().nextInt(9);
+		int column = new Random().nextInt(9);	
 		multiArr[row][column] = 0;		// set a random cell to zero.	
 		return multiArr;
 	}
